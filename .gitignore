@@ -1,0 +1,12 @@
+*.user
+*.user.*
+*.autosave
+build*
+*.dll
+*.lib
+*.a
+Makefile*
+*.Debug
+*.Release
+*.o
+
