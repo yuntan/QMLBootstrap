@@ -8,15 +8,20 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp
 
+COMPONENT_FILES += $$files(qml/Components/*.qml)
+
 QML_FILES += \
     qml/main.qml
 
-#JS_FILES += \
+JS_FILES += $$files(js/*.js)
 
-OTHER_FILES += $$QML_FILES
-
-#RESOURCES += \
+OTHER_FILES += \
+    $$COMPONENT_FILES \
+    $$QML_FILES \
+    $$JS_FILES
 
 RESOURCES += \
     qml.qrc \
-    font.qrc
+    font.qrc \
+    component.qrc \
+    js.qrc

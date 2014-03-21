@@ -34,12 +34,7 @@ void setupDpUnit() {
 
 void setupFontAwesome() {
     int fontId = QFontDatabase::addApplicationFont(":/font/fontawesome-webfont.ttf");
-//    int fontId = QFontDatabase::addApplicationFont("/home/yuntan/Workspace/QtCreator/QMLBootstrap/font/fontawesome-webfont.ttf");
-//    int fontId = QFontDatabase::addApplicationFont("/home/yuntan/Workspace/QtCreator/QMLBootstrap/font/FontAwesome.otf");
-
     if(fontId == -1) { qWarning() << "Error: failed to load FontAwesome font"; }
-
-    qDebug() << QFontDatabase::applicationFontFamilies(fontId);
 }
 
 int main(int argc, char *argv[]) {

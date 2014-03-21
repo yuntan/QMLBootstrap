@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>font/fontawesome-webfont.ttf</file>
+        <file>qml/Components/FontAwesomeIcon.qml</file>
     </qresource>
 </RCC>
