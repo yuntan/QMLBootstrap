@@ -1,3 +1,5 @@
+#include <QtCore/qmath.h>
+#include <QVariant>
 #include <QColor>
 #include "bootstrapinfo.h"
 
@@ -5,13 +7,24 @@ BootstrapInfo::BootstrapInfo(QObject *parent) :
     QObject(parent)
 {
     // set utf8 codes to m_faIcons
-    setFaIcons();
+    setupFaIcons();
 
-    // set color values to m_color
-    setColors();
+    // Gray and brand colors for use across Bootstrap.
+    setupColors();
+
+    setupScaffolding();
+
+    setupFontSize();
+
+    // Define common padding and border radius sizes and more.
+    // Values based on 14px text and 1.428 line-height (~20px to start).
+    setupComponentValues();
+
+    // Define text, background and border colors of button.
+    setupButtonValues();
 }
 
-void BootstrapInfo::setFaIcons()
+void BootstrapInfo::setupFaIcons()
 {
     m_faIcons = new QQmlPropertyMap(this);
 
@@ -388,18 +401,121 @@ void BootstrapInfo::setFaIcons()
     m_faIcons->insert(QLatin1String("fa-plus-square-o"),        QVariant("\uf196"));
 }
 
-void BootstrapInfo::setColors()
+void BootstrapInfo::setupColors()
 {
     m_colors = new QQmlPropertyMap(this);
 
-    m_colors->insert(QLatin1String("gray-darker"), QVariant(QColor("#000").lighter(114)));
-    m_colors->insert(QLatin1String("gray-dark"), QVariant(QColor("#000").lighter(120)));
-    m_colors->insert(QLatin1String("gray"), QVariant(QColor("#000").lighter(134)));
-    m_colors->insert(QLatin1String("gray-light"), QVariant(QColor("#000").lighter(160)));
-    m_colors->insert(QLatin1String("gray-lighter"), QVariant(QColor("#000").lighter(194)));
+    QColor black = QColor("#000");
+    m_colors->insert(QLatin1String("gray-darker"), QVariant(black.lighter(114)));
+    m_colors->insert(QLatin1String("gray-dark"), QVariant(black.lighter(120)));
+    m_colors->insert(QLatin1String("gray"), QVariant(black.lighter(134)));
+    m_colors->insert(QLatin1String("gray-light"), QVariant(black.lighter(160)));
+    m_colors->insert(QLatin1String("gray-lighter"), QVariant(black.lighter(194)));
     m_colors->insert(QLatin1String("brand-primary"), QVariant("#428bca"));
     m_colors->insert(QLatin1String("brand-success"), QVariant("#5cb85c"));
     m_colors->insert(QLatin1String("brand-info"), QVariant("#5bc0de"));
     m_colors->insert(QLatin1String("brand-warning"), QVariant("#f0ad4e"));
     m_colors->insert(QLatin1String("brand-danger"), QVariant("#d9534f"));
+}
+
+void BootstrapInfo::setupScaffolding()
+{
+    m_scaffolding = new QQmlPropertyMap(this);
+
+    // Background color
+    m_scaffolding->insert(QLatin1String("body-bg"), QVariant("#fff"));
+    // Global text color
+    m_scaffolding->insert(QLatin1String("text-color"), m_colors->value("gray-dark"));
+    // Global textual link color
+    m_scaffolding->insert(QLatin1String("link-color"), m_colors->value("brand-primary"));
+    // Link hover color
+    m_scaffolding->insert(QLatin1String("link-hover-color"),
+                          QVariant(QColor(m_scaffolding->value("link-color").toString()).darker(115)));
+}
+
+void BootstrapInfo::setupFontSize()
+{
+    m_fontSize = new QQmlPropertyMap(this);
+
+    const float base = 14.0f; // dp
+    m_fontSize->insert(QLatin1String("base"), QVariant((int)base)); // 14dp
+    m_fontSize->insert(QLatin1String("large"), QVariant(qCeil(base * 1.25f))); // 18dp
+    m_fontSize->insert(QLatin1String("small"), QVariant(qCeil(base * 0.85f))); // 12dp
+    m_fontSize->insert(QLatin1String("xsmall"), QVariant(qCeil(base * 0.85f))); // 12dp
+}
+
+void BootstrapInfo::setupComponentValues()
+{
+    m_lineHeight = new QQmlPropertyMap(this);
+    m_padding = new QQmlPropertyMap(this);
+    m_borderRadius = new QQmlPropertyMap(this);
+    m_globalColors = new QQmlPropertyMap(this);
+
+    const float base = 20.0f / 14.0f;
+    // Unit-less `line-height` for use in components like buttons.
+    m_lineHeight->insert(QLatin1String("base"), QVariant(base));
+    // Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+    m_lineHeight->insert(QLatin1String("computed"),
+                         QVariant(qFloor(m_fontSize->value("base").toFloat() * base))); // 20dp
+    // Values based on 14px text and 1.428 line-height (~20px to start).
+    m_lineHeight->insert(QLatin1String("large"), QVariant(1.33f));
+    m_lineHeight->insert(QLatin1String("small"), QVariant(1.5f));
+    m_lineHeight->insert(QLatin1String("xsmall"), QVariant(1.5f));
+
+    // dp
+    m_padding->insert(QLatin1String("base-vrt"), QVariant(6));
+    m_padding->insert(QLatin1String("base-hrz"), QVariant(12));
+    m_padding->insert(QLatin1String("large-vrt"), QVariant(10));
+    m_padding->insert(QLatin1String("large-hrz"), QVariant(16));
+    m_padding->insert(QLatin1String("small-vrt"), QVariant(5));
+    m_padding->insert(QLatin1String("small-hrz"), QVariant(10));
+    m_padding->insert(QLatin1String("xsmall-vrt"), QVariant(1));
+    m_padding->insert(QLatin1String("xsmall-hrz"), QVariant(5));
+
+    // dp
+    m_borderRadius->insert(QLatin1String("base"), QVariant(4));
+    m_borderRadius->insert(QLatin1String("large"), QVariant(6));
+    m_borderRadius->insert(QLatin1String("small"), QVariant(3));
+    m_borderRadius->insert(QLatin1String("xsmall"), QVariant(3));
+
+    // Global color for active items
+    m_globalColors->insert(QLatin1String("active"), QVariant("#fff"));
+    // Global background color for active items
+    m_globalColors->insert(QLatin1String("active-bg"), m_colors->value("brand-primary"));
+}
+
+void BootstrapInfo::setupButtonValues()
+{
+    m_buttonColors = new QQmlPropertyMap(this);
+
+    QString text = "#fff";
+    m_buttonColors->insert(QLatin1String("default-text"), QVariant("#333"));
+    m_buttonColors->insert(QLatin1String("default-bg"), QVariant("#fff"));
+    m_buttonColors->insert(QLatin1String("default-border"), QVariant("#ccc"));
+    m_buttonColors->insert(QLatin1String("primary-text"), QVariant(text));
+    m_buttonColors->insert(QLatin1String("primary-bg"),
+                           QVariant(m_colors->value("brand-primary")));
+    m_buttonColors->insert(QLatin1String("primary-border"),
+                           QVariant(QColor(m_buttonColors->value("primary-bg").toString()).darker(105)));
+    m_buttonColors->insert(QLatin1String("success-text"), QVariant(text));
+    m_buttonColors->insert(QLatin1String("success-bg"),
+                           QVariant(m_colors->value("brand-success")));
+    m_buttonColors->insert(QLatin1String("success-border"),
+                           QVariant(QColor(m_buttonColors->value("success-bg").toString()).darker(105)));
+    m_buttonColors->insert(QLatin1String("info-text"), QVariant(text));
+    m_buttonColors->insert(QLatin1String("info-bg"),
+                           QVariant(m_colors->value("brand-info")));
+    m_buttonColors->insert(QLatin1String("info-border"),
+                           QVariant(QColor(m_buttonColors->value("info-bg").toString()).darker(105)));
+    m_buttonColors->insert(QLatin1String("warning-text"), QVariant(text));
+    m_buttonColors->insert(QLatin1String("warning-bg"),
+                           QVariant(m_colors->value("brand-warning")));
+    m_buttonColors->insert(QLatin1String("warning-border"),
+                           QVariant(QColor(m_buttonColors->value("warning-bg").toString()).darker(105)));
+    m_buttonColors->insert(QLatin1String("danger-text"), QVariant(text));
+    m_buttonColors->insert(QLatin1String("danger-bg"),
+                           QVariant(m_colors->value("brand-danger")));
+    m_buttonColors->insert(QLatin1String("danger-border"),
+                           QVariant(QColor(m_buttonColors->value("danger-bg").toString()).darker(105)));
+    m_buttonColors->insert(QLatin1String("link-disabled-color"), m_colors->value("gray-light"));
 }

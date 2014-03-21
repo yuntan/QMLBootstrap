@@ -13,7 +13,8 @@
 static const struct {
     const char *type;
 } components [] = {
-    { "FontAwesomeIcon" }
+    { "FontAwesomeIcon" },
+    { "Button" }
 };
 
 QApplication *app;

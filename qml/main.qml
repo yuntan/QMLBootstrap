@@ -8,15 +8,30 @@ Controls.ApplicationWindow {
 
     width: 360*dp ; height: 360*dp
 
-    FontAwesomeIcon {
-        anchors.centerIn: parent
-        faIcon: "fa-github"
-    }
-
-    MouseArea {
+    Rectangle {
         anchors.fill: parent
-        onClicked: {
-            Qt.quit();
+        color: BS.scaffolding["body-bg"]
+
+        //    FontAwesomeIcon {
+        //        anchors.centerIn: parent
+        //        faIcon: "fa-github"
+        //    }
+
+        Button {
+            size: "large"
+//            round: false
+//            enabled: false
+//            option: "primary"
+            anchors.centerIn: parent
+            text: "Hello QML Bootstrap!"
+            onClicked: Qt.quit()
         }
+
+        //    MouseArea {
+        //        anchors.fill: parent
+        //        onClicked: {
+        //            Qt.quit();
+        //        }
+        //    }
     }
 }

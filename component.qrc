@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/Components/FontAwesomeIcon.qml</file>
+        <file>qml/Components/Button.qml</file>
     </qresource>
 </RCC>
