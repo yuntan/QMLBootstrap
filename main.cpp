@@ -10,13 +10,6 @@
 
 #include "src/bootstrap/bootstrapinfo.h"
 
-static const struct {
-    const char *type;
-} components [] = {
-    { "FontAwesomeIcon" },
-    { "Button" }
-};
-
 QApplication *app;
 QQmlApplicationEngine *engine;
 
@@ -60,9 +53,6 @@ void registerTypes()
     const char *uri = "QMLBootstrap";
     const int major = 1, minor = 0;
     qmlRegisterSingletonType<BootstrapInfo>(uri, major, minor, "BS", bsInfoProvider);
-    for(int i = 0; i < int(sizeof(components) / sizeof(components[0])); i++) {
-        qmlRegisterType(QUrl(QString("qrc:/qml/Components/%1.qml").arg(components[i].type)), uri, major, minor, components[i].type);
-    }
 }
 
 int main(int argc, char *argv[])
