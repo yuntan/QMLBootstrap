@@ -8,14 +8,13 @@
 #include <QtAndroidExtras/QAndroidJniObject>
 #endif
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
-    QQmlApplicationEngine engine;
+QApplication *app;
+QQmlApplicationEngine *engine;
 
+void setupDpUnit() {
     //implement density-independent pixel
     int dp = 1;
-    qreal dotsPerInch = app.screens()[0]->physicalDotsPerInch();
+    qreal dotsPerInch = app->screens()[0]->physicalDotsPerInch();
     qDebug() << "physicalDotsPerInch = " << dotsPerInch;
     dp = qRound(dotsPerInch) / 125;
 #ifdef Q_OS_ANDROID
@@ -30,19 +29,42 @@ int main(int argc, char *argv[])
     dp = 3;
 #endif
     qDebug() << "1dp = " << dp;
-    engine.rootContext()->setContextProperty(QLatin1String("dp"), QVariant::fromValue(dp));
+    engine->rootContext()->setContextProperty(QLatin1String("dp"), QVariant::fromValue(dp));
+}
 
-    qDebug() << "OfflineStoragePath: " << engine.offlineStoragePath();
+void setupFontAwesome() {
+    int fontId = QFontDatabase::addApplicationFont(":/font/fontawesome-webfont.ttf");
+//    int fontId = QFontDatabase::addApplicationFont("/home/yuntan/Workspace/QtCreator/QMLBootstrap/font/fontawesome-webfont.ttf");
+//    int fontId = QFontDatabase::addApplicationFont("/home/yuntan/Workspace/QtCreator/QMLBootstrap/font/FontAwesome.otf");
+
+    if(fontId == -1) { qWarning() << "Error: failed to load FontAwesome font"; }
+
+    qDebug() << QFontDatabase::applicationFontFamilies(fontId);
+}
+
+int main(int argc, char *argv[]) {
+//    QApplication app(argc, argv);
+    app = new QApplication(argc,argv);
+    app->setOrganizationName("YourOrganizationName");
+    app->setApplicationName("YourAppName");
+
+//    QQmlApplicationEngine engine;
+    engine = new QQmlApplicationEngine();
+
+    setupDpUnit();
+    setupFontAwesome();
+
+    qDebug() << "OfflineStoragePath: " << engine->offlineStoragePath();
 
     // qmlファイルをロード
-    engine.load(QUrl("qrc:/qml/main.qml"));
+    engine->load(QUrl("qrc:/qml/main.qml"));
 
-    QObject *topLevel = engine.rootObjects().value(0);
+    QObject *topLevel = engine->rootObjects().value(0);
     QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
     if ( !window ) {
         qWarning("Error: Your root item has to be a Window.");
         return -1;
     }
     window->show();
-    return app.exec();
+    return app->exec();
 }

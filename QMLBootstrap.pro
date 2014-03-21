@@ -1,4 +1,4 @@
-TARGET = YOURAPPNAME
+TARGET = YourAppName
 TEMPLATE = app
 
 QT += qml quick widgets
@@ -18,4 +18,5 @@ OTHER_FILES += $$QML_FILES
 #RESOURCES += \
 
 RESOURCES += \
-    qml.qrc
+    qml.qrc \
+    font.qrc
