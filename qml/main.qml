@@ -1,6 +1,6 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1 as Controls
-import "Components"
+import QMLBootstrap 1.0
 
 Controls.ApplicationWindow {
     id: mainWindow

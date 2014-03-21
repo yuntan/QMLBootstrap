@@ -1,5 +1,5 @@
 import QtQuick 2.2
-import "../../js/fontawesome.js" as JS
+import QMLBootstrap 1.0
 
 Item {
     property string faIcon
@@ -8,8 +8,8 @@ Item {
 
     Text {
         id: innertext
-        text: JS.faIcons[faIcon] !== undefined ? JS.faIcons[faIcon]
-                                               : JS.faIcons["fa-question"]
+        text: BS.faIcons[faIcon] !== undefined ? BS.faIcons[faIcon]
+                                               : BS.faIcons["fa-question"]
         font.family: "FontAwesome"
         font.pointSize: 64
     }

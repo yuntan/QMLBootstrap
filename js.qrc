@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>js/fontawesome.js</file>
-    </qresource>
-</RCC>

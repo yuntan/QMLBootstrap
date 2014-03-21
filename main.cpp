@@ -8,10 +8,19 @@
 #include <QtAndroidExtras/QAndroidJniObject>
 #endif
 
+#include "src/bootstrap/bootstrapinfo.h"
+
+static const struct {
+    const char *type;
+} components [] = {
+    { "FontAwesomeIcon" }
+};
+
 QApplication *app;
 QQmlApplicationEngine *engine;
 
-void setupDpUnit() {
+void setupDpUnit()
+{
     //implement density-independent pixel
     int dp = 1;
     qreal dotsPerInch = app->screens()[0]->physicalDotsPerInch();
@@ -32,12 +41,31 @@ void setupDpUnit() {
     engine->rootContext()->setContextProperty(QLatin1String("dp"), QVariant::fromValue(dp));
 }
 
-void setupFontAwesome() {
+void setupFontAwesome()
+{
     int fontId = QFontDatabase::addApplicationFont(":/font/fontawesome-webfont.ttf");
     if(fontId == -1) { qWarning() << "Error: failed to load FontAwesome font"; }
 }
 
-int main(int argc, char *argv[]) {
+static QObject *bsInfoProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new BootstrapInfo();
+}
+
+void registerTypes()
+{
+    const char *uri = "QMLBootstrap";
+    const int major = 1, minor = 0;
+    qmlRegisterSingletonType<BootstrapInfo>(uri, major, minor, "BS", bsInfoProvider);
+    for(int i = 0; i < int(sizeof(components) / sizeof(components[0])); i++) {
+        qmlRegisterType(QUrl(QString("qrc:/qml/Components/%1.qml").arg(components[i].type)), uri, major, minor, components[i].type);
+    }
+}
+
+int main(int argc, char *argv[])
+{
 //    QApplication app(argc, argv);
     app = new QApplication(argc,argv);
     app->setOrganizationName("YourOrganizationName");
@@ -48,6 +76,7 @@ int main(int argc, char *argv[]) {
 
     setupDpUnit();
     setupFontAwesome();
+    registerTypes();
 
     qDebug() << "OfflineStoragePath: " << engine->offlineStoragePath();
 

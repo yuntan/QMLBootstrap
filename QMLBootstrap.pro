@@ -6,7 +6,11 @@ android : QT += androidextras
 
 QMAKE_CXXFLAGS += -std=c++0x
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    src/bootstrap/bootstrapinfo.cpp
+
+HEADERS += \
+    src/bootstrap/bootstrapinfo.h
 
 COMPONENT_FILES += $$files(qml/Components/*.qml)
 
@@ -23,5 +27,4 @@ OTHER_FILES += \
 RESOURCES += \
     qml.qrc \
     font.qrc \
-    component.qrc \
-    js.qrc
+    component.qrc
