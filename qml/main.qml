@@ -18,14 +18,44 @@ Controls.ApplicationWindow {
         //        faIcon: "fa-github"
         //    }
 
-        Button {
-            size: "large"
-//            round: false
-//            enabled: false
-//            option: "primary"
+        Column {
             anchors.centerIn: parent
-            text: "Hello QML Bootstrap!"
-            onClicked: Qt.quit()
+            spacing: 3*dp
+            Button {
+                size: "large"
+                option: "info"
+                faIcon: "fa-github"
+                boldFont: true
+                text: "Hello QML Bootstrap!"
+                onClicked: Qt.quit()
+                //            round: false
+                //            enabled: false
+            }
+
+            Row {
+                spacing: 3*dp
+                Button {
+                    //            faIcon: "fa-github"
+                    faIcon: "fa-trash-o"
+                    size: "large"
+                    option: "default"
+                    text: "Default"
+                }
+                Button {
+                    option: "primary"
+                    text: "Primaty"
+                }
+                Button {
+                    size: "small"
+                    option: "success"
+                    text: "Success"
+                }
+                Button {
+                    size: "xsmall"
+                    option: "info"
+                    text: "Info"
+                }
+            }
         }
 
         //    MouseArea {

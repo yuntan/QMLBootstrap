@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import QMLBootstrap 1.0
 
 Item {
@@ -7,6 +8,8 @@ Item {
     property string size: "base"
     property string text: ""
     property bool round: true
+    property alias faIcon: faText.faIcon
+    property bool boldFont: false
     readonly property alias pressed: mouse.pressed
 
     signal clicked()
@@ -14,8 +17,8 @@ Item {
     signal pressAndHold()
 
     width: implicitWidth; height: implicitHeight
-    implicitWidth: (2 + BS.padding["%1-hrz".arg(btn.size)] * 2 + btnText.implicitWidth)*dp
-    implicitHeight: (2 + BS.padding["%1-vrt".arg(btn.size)] * 2 + btnText.implicitHeight)*dp
+    implicitWidth: (2 + BS.padding["%1-hrz".arg(btn.size)] * 2 + textRow.width)*dp
+    implicitHeight: (2 + BS.padding["%1-vrt".arg(btn.size)] * 2 + textRow.height)*dp
 
     Rectangle {
         id: btnRect
@@ -42,13 +45,26 @@ Item {
             }
         }
 
-        Text {
-            id: btnText
+        RowLayout {
+            id: textRow
             anchors.centerIn: parent
-            text: btn.text
-            font.pixelSize: BS.fontSize[btn.size]*dp
-            font.bold: btn.size === "large"
-            color: BS.buttonColors["%1-text".arg(btn.option)]
+            width: faText.implicitWidth + spacing + btnText.implicitWidth
+            height: btnText.implicitHeight
+            spacing: faText.implicitWidth !== 0 ? 3*dp : 0
+            FontAwesomeIcon {
+                id: faText
+                Layout.alignment: Qt.AlignVCenter
+                size: btn.size
+                boldFont: btn.boldFont
+                color: BS.buttonColors["%1-text".arg(btn.option)]
+            }
+            Text {
+                id: btnText
+                text: btn.text
+                font.pixelSize: BS.fontSize[btn.size]*dp
+                font.bold: btn.boldFont
+                color: BS.buttonColors["%1-text".arg(btn.option)]
+            }
         }
 
         MouseArea {
