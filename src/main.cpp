@@ -8,7 +8,7 @@
 #include <QtAndroidExtras/QAndroidJniObject>
 #endif
 
-#include "src/bootstrap/bootstrapinfo.h"
+#include "bootstrap/properties.h"
 
 QApplication *app;
 QQmlApplicationEngine *engine;
@@ -41,18 +41,16 @@ void setupFontAwesome()
     if(fontId == -1) { qWarning() << "Error: failed to load FontAwesome font"; }
 }
 
-static QObject *bsInfoProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-    return new BootstrapInfo();
-}
-
 void registerTypes()
 {
-    const char *uri = "QMLBootstrap";
-    const int major = 1, minor = 0;
-    qmlRegisterSingletonType<BootstrapInfo>(uri, major, minor, "BS", bsInfoProvider);
+//    const char *uri = "QMLBootstrap";
+//    const int major = 1, minor = 0;
+
+    setupFaIcons();
+    setupProperties();
+    customize();
+    engine->rootContext()->setContextProperty(QLatin1String("faIcons"), m_faIcons);
+    engine->rootContext()->setContextProperty(QLatin1String("bs"), m_properties);
 }
 
 int main(int argc, char *argv[])

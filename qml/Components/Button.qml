@@ -1,7 +1,31 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import QMLBootstrap 1.0
 
+/* Button - Bootstrap style button
+ * \property string option
+ *           Specify bootstrap option name.
+ *           (ex. default, primary, success)
+ * \property string faIcon
+ *           Specify FontAwesome icon's name.
+ * \property string size
+ *           Specify bootstrap size name.
+ *           (large, base, small, xsmall)
+ * \property bool boldFont
+ * \property bool enabled
+ *           When it is true, button becomes unclickable.
+ * \property bool round
+ *           Whether button should have rounded corner.
+ * \property string text
+ * \property readonly pressed
+ *
+ * \qml
+ *   Button {
+ *     option: "info"
+ *     faIcon: "fa-github"
+ *     size: "large"
+ *     text: "Github"
+ *   }
+ */
 Item {
     id: btn
     property string option: "default"
@@ -17,22 +41,22 @@ Item {
     signal pressAndHold()
 
     width: implicitWidth; height: implicitHeight
-    implicitWidth: (2 + BS.padding["%1-hrz".arg(btn.size)] * 2 + textRow.width)*dp
-    implicitHeight: (2 + BS.padding["%1-vrt".arg(btn.size)] * 2 + textRow.height)*dp
+    implicitWidth: (2 + bs["padding-%1-horizontal".arg(btn.size)] * 2 + textRow.width)*dp
+    implicitHeight: (2 + bs["padding-%1-vertical".arg(btn.size)] * 2 + textRow.height)*dp
 
     Rectangle {
         id: btnRect
         anchors.fill: parent
-        color: mouse.containsMouse ? Qt.darker(BS.buttonColors["%1-bg".arg(btn.option)], 1.1)
-                                   : BS.buttonColors["%1-bg".arg(btn.option)]
+        color: mouse.containsMouse ? Qt.darker(bs["btn-%1-bg".arg(btn.option)], 1.1)
+                                   : bs["btn-%1-bg".arg(btn.option)]
 
         opacity: btn.enabled ? 1 : 0.65
         border {
-            color: mouse.containsMouse ? Qt.darker(BS.buttonColors["%1-border".arg(btn.option)], 1.1)
-                                       : BS.buttonColors["%1-border".arg(btn.option)]
+            color: mouse.containsMouse ? Qt.darker(bs["btn-%1-border".arg(btn.option)], 1.1)
+                                       : bs["btn-%1-border".arg(btn.option)]
             width: 1*dp
         }
-        radius: btn.round ? BS.borderRadius[btn.size] : 0
+        radius: btn.round ? bs["border-radius-%1".arg(btn.size)] : 0
 
         Rectangle {
             id: rectShadow
@@ -56,14 +80,14 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 size: btn.size
                 boldFont: btn.boldFont
-                color: BS.buttonColors["%1-text".arg(btn.option)]
+                color: bs["btn-%1-color".arg(btn.option)]
             }
             Text {
                 id: btnText
                 text: btn.text
-                font.pixelSize: BS.fontSize[btn.size]*dp
+                font.pixelSize: bs["font-size-%1".arg(btn.size)]*dp
                 font.bold: btn.boldFont
-                color: BS.buttonColors["%1-text".arg(btn.option)]
+                color: bs["btn-%1-color".arg(btn.option)]
             }
         }
 

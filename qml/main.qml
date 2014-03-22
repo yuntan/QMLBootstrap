@@ -1,6 +1,5 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.1 as Controls
-import QMLBootstrap 1.0
 import "Components"
 
 Controls.ApplicationWindow {
@@ -11,7 +10,7 @@ Controls.ApplicationWindow {
 
     Rectangle {
         anchors.fill: parent
-        color: BS.scaffolding["body-bg"]
+        color: bs["body-bg"]
 
         //    FontAwesomeIcon {
         //        anchors.centerIn: parent
