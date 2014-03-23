@@ -35,7 +35,7 @@ Controls.ApplicationWindow {
                 spacing: 3*dp
                 Button {
                     //            faIcon: "fa-github"
-                    faIcon: "fa-trash-o"
+//                    faIcon: "fa-trash-o"
                     size: "large"
                     option: "default"
                     text: "Default"
@@ -54,6 +54,9 @@ Controls.ApplicationWindow {
                     option: "info"
                     text: "Info"
                 }
+            }
+            Input {
+                width: 300*dp;
             }
         }
 
