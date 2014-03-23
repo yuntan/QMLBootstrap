@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.1
  * \property string size
  *           Specify bootstrap size name.
  *           (large, base, small, xsmall)
+ *           note: width and height is settled by this property.
  * \property bool boldFont
  * \property bool enabled
  *           When it is true, button becomes unclickable.
@@ -17,6 +18,10 @@ import QtQuick.Layouts 1.1
  *           Whether button should have rounded corner.
  * \property string text
  * \property readonly pressed
+ *
+ * \signal clicked()
+ * \signal doubleClicked()
+ * \signal pressAndHold()
  *
  * \qml
  *   Button {
@@ -60,7 +65,10 @@ Item {
 
         Rectangle {
             id: rectShadow
-            anchors.fill: parent
+            anchors.centerIn: parent
+            width: parent.width - parent.border.width * 2
+            height: parent.height - parent.border.width * 2
+            radius: parent.radius
             visible: mouse.pressed && mouse.containsMouse
             gradient: Gradient {
                 GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.25) }
