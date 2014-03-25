@@ -59,6 +59,7 @@ Controls.ApplicationWindow {
             Input {
                 width: 300*dp;
                 placeHolderText: "Input"
+                enabled: false
             }
 
             TextArea {
@@ -66,6 +67,20 @@ Controls.ApplicationWindow {
                 placeHolderText: "TextArea"
                 row: 3
 //                enabled: false
+            }
+
+            CheckBox {
+                text: "CheckBox"
+                enabled: false
+            }
+
+            Row {
+                spacing: 20*dp
+                RadioGroup { id: radioGroup }
+                Radio { text: "Radio1"; group: radioGroup }
+                Radio { text: "Radio2"; checked: true; group: radioGroup }
+                Radio { text: "Radio3"; group: radioGroup }
+                Radio { text: "Radio4"; group: radioGroup }
             }
         }
     }

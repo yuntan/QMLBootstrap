@@ -4,5 +4,8 @@
         <file>qml/Components/Button.qml</file>
         <file>qml/Components/Input.qml</file>
         <file>qml/Components/TextArea.qml</file>
+        <file>qml/Components/Radio.qml</file>
+        <file>qml/Components/CheckBox.qml</file>
+        <file>qml/Components/RadioGroup.qml</file>
     </qresource>
 </RCC>
