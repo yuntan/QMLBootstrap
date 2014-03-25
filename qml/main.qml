@@ -55,16 +55,18 @@ Controls.ApplicationWindow {
                     text: "Info"
                 }
             }
+
             Input {
                 width: 300*dp;
+                placeHolderText: "Input"
+            }
+
+            TextArea {
+                width: 300*dp
+                placeHolderText: "TextArea"
+                row: 3
+//                enabled: false
             }
         }
-
-        //    MouseArea {
-        //        anchors.fill: parent
-        //        onClicked: {
-        //            Qt.quit();
-        //        }
-        //    }
     }
 }

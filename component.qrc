@@ -3,5 +3,6 @@
         <file>qml/Components/FontAwesomeIcon.qml</file>
         <file>qml/Components/Button.qml</file>
         <file>qml/Components/Input.qml</file>
+        <file>qml/Components/TextArea.qml</file>
     </qresource>
 </RCC>

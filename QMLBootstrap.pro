@@ -23,8 +23,7 @@ JS_FILES += $$files(js/*.js)
 OTHER_FILES += \
     $$COMPONENT_FILES \
     $$QML_FILES \
-    $$JS_FILES \
-    qml/Components/Input.qml
+    $$JS_FILES
 
 RESOURCES += \
     qml.qrc \
