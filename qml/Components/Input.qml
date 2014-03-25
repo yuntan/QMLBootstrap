@@ -23,6 +23,7 @@ import QtQuick 2.2
  */
 Item {
     id: input
+
     // TODO implement type
     property string type: "text"
     property string size: "base"
@@ -55,14 +56,16 @@ Item {
 
         Rectangle {
             id: rectShadow
-            anchors.centerIn: parent
+            anchors {
+                top: parent.top; topMargin: parent.border.width
+                horizontalCenter: parent.horizontalCenter
+            }
             width: parent.width - parent.border.width * 2
-            height: parent.height - parent.border.width * 2
+            height: 3*dp
             radius: parent.radius
             visible: true
             gradient: Gradient {
                 GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.25) }
-                GradientStop { position: 0.1; color: "transparent" }
                 GradientStop { position: 1.0; color: "transparent" }
             }
         }
@@ -71,10 +74,10 @@ Item {
             id: placeHolder
             clip: true
             anchors.centerIn: parent
-            width: parent.width - (1 + bs["padding-%1-horizontal".arg(input.size)])*dp * 2
+            width: parent.width - (parent.border.width + bs["padding-%1-horizontal".arg(input.size)]*dp) * 2
             height: implicitHeight
-            color: bs["gray-light"]
-            text: input.text !== "" ? placeHolderText : ""
+            color: bs["input-color-placeholder"]
+            text: textInput.text === "" ? placeHolderText : ""
             font.pixelSize: bs["font-size-%1".arg(input.size)]*dp
             font.bold: input.boldFont
         }
@@ -83,9 +86,9 @@ Item {
             id: textInput
             clip: true
             anchors.centerIn: parent
-            width: parent.width - (1 + bs["padding-%1-horizontal".arg(input.size)])*dp * 2
+            width: parent.width - (parent.border.width + bs["padding-%1-horizontal".arg(input.size)]*dp) * 2
             height: implicitHeight
-            color: bs["gray"]
+            color: bs["input-color"]
             text: ""
             font.pixelSize: bs["font-size-%1".arg(input.size)]*dp
             font.bold: input.boldFont
