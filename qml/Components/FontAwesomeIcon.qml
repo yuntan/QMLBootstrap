@@ -21,6 +21,7 @@ import QtQuick 2.2
  *     color: "#333"
  *     faIcon: "fa-github"
  *   }
+ * \endqml
  */
 Item {
     id: faItem

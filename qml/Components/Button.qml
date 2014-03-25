@@ -30,6 +30,7 @@ import QtQuick.Layouts 1.1
  *     size: "large"
  *     text: "Github"
  *   }
+ * \endqml
  */
 Item {
     id: btn
@@ -103,6 +104,7 @@ Item {
             id: mouse
             anchors.fill: parent
             hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
             onClicked: btn.clicked()
             onDoubleClicked: btn.doubleClicked()
             onPressAndHold: btn.pressAndHold()

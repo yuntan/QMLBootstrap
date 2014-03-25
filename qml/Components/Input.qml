@@ -7,7 +7,8 @@ import QtQuick 2.2
  *           note: height is settled by this property.
  * \property bool boldFont
  * \property bool enabled
- *           When it is true, form becomes uneditable.
+ *           When it is false, form becomes uneditable
+ *           and be slightly different look.
  * \property bool round
  *           Whether form should have rounded corner.
  * \property string text
@@ -20,6 +21,7 @@ import QtQuick 2.2
  *     size: "large"
  *     placeHolderText: "Input name"
  *   }
+ * \endqml
  */
 Item {
     id: input
@@ -82,6 +84,7 @@ Item {
             font.bold: input.boldFont
         }
 
+        // TODO flickable
         TextInput {
             id: textInput
             clip: true
@@ -93,6 +96,14 @@ Item {
             font.pixelSize: bs["font-size-%1".arg(input.size)]*dp
             font.bold: input.boldFont
             onAccepted: input.accepted()
+            // TODO cursor
+        }
+
+        // in order only to set mouse cursor to Ibeam
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.IBeamCursor
+            acceptedButtons: Qt.NoButton
         }
 
         Behavior on border.color { ColorAnimation { duration: 200 } }
