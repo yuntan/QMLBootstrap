@@ -391,6 +391,21 @@ void setupFaIcons()
     ADD_ICON(fa-plus-square-o, \uf196)
 }
 
+QColor lighten(QColor color, uint amount)
+{
+
+    int lightness = color.lightness() + 255 * amount / 100;
+    if(lightness > 255) { lightness = 255; }
+    return QColor::fromHsl(color.hue(), color.saturation(), lightness);
+}
+
+QColor darken(QColor color, uint amount)
+{
+    int lightness = color.lightness() - 255 * amount / 100;
+    if(lightness < 0) { lightness = 0; }
+    return QColor::fromHsl(color.hue(), color.saturation(), lightness);
+}
+
 void setupProperties()
 {
     m_properties = new QQmlPropertyMap();
@@ -398,11 +413,11 @@ void setupProperties()
     // == Colors ==
     // Gray and brand colors
     auto black = QColor("#000");
-    SET_PROPERTY(gray-darker, black.lighter(114)) // #222
-    SET_PROPERTY(gray-dark, black.lighter(120)) // #333
-    SET_PROPERTY(gray, black.lighter(134)) // #555
-    SET_PROPERTY(gray-light, black.lighter(160)) // #999
-    SET_PROPERTY(gray-lighter, black.lighter(194)) // #eee
+    SET_PROPERTY(gray-darker, lighten(black, 14)) // #222
+    SET_PROPERTY(gray-dark, lighten(black, 20)) // #333
+    SET_PROPERTY(gray, lighten(black, 34)) // #555
+    SET_PROPERTY(gray-light, lighten(black, 60)) // #999
+    SET_PROPERTY(gray-lighter, lighten(black, 94)) // #eee
 
     SET_PROPERTY(brand-primary, "#428bca")
     SET_PROPERTY(brand-success, "#5cb85c")
@@ -416,7 +431,7 @@ void setupProperties()
     SET_PROPERTY(body-bg, "#fff") // Background color
     SET_PROPERTY_BY_ID(text-color, gray-dark) // Global text color
     SET_PROPERTY_BY_ID(link-color, brand-primary) // Global textual link color
-    SET_PROPERTY(link-hover-color, QColor(GET_VALUE(link-color).toString()).darker(115)) // Link hover color
+    SET_PROPERTY(link-hover-color, darken(GET_COLOR(link-color), 15)) // Link hover color
 
 
     // == Typography ==
@@ -530,23 +545,23 @@ void setupProperties()
 
     SET_PROPERTY(btn-primary-color, "#fff")
     SET_PROPERTY_BY_ID(btn-primary-bg, brand-primary)
-    SET_PROPERTY(btn-primary-border, QColor(GET_VALUE(btn-primary-bg).toString()).darker(105))
+    SET_PROPERTY(btn-primary-border, darken(GET_COLOR(btn-primary-bg), 5))
 
     SET_PROPERTY(btn-success-color, "#fff")
     SET_PROPERTY_BY_ID(btn-success-bg, brand-success)
-    SET_PROPERTY(btn-success-border, QColor(GET_VALUE(btn-success-bg).toString()).darker(105))
+    SET_PROPERTY(btn-success-border, darken(GET_COLOR(btn-success-bg), 5))
 
     SET_PROPERTY(btn-info-color, "#fff")
     SET_PROPERTY_BY_ID(btn-info-bg, brand-info)
-    SET_PROPERTY(btn-info-border, QColor(GET_VALUE(btn-info-bg).toString()).darker(105))
+    SET_PROPERTY(btn-info-border, darken(GET_COLOR(btn-info-bg), 5))
 
     SET_PROPERTY(btn-warning-color, "#fff")
     SET_PROPERTY_BY_ID(btn-warning-bg, brand-warning)
-    SET_PROPERTY(btn-warning-border, QColor(GET_VALUE(btn-warning-bg).toString()).darker(105))
+    SET_PROPERTY(btn-warning-border, darken(GET_COLOR(btn-warning-bg), 5))
 
     SET_PROPERTY(btn-danger-color, "#fff")
     SET_PROPERTY_BY_ID(btn-danger-bg, brand-danger)
-    SET_PROPERTY(btn-danger-border, QColor(GET_VALUE(btn-danger-bg).toString()).darker(105))
+    SET_PROPERTY(btn-danger-border, darken(GET_COLOR(btn-danger-bg), 5))
 
     SET_PROPERTY_BY_ID(btn-link-disabled-color, gray-light)
 
@@ -588,7 +603,7 @@ void setupProperties()
 
     SET_PROPERTY_BY_ID(dropdown-link-color, gray-dark) // Dropdown link text color.
     // Hover color for dropdown links.
-    SET_PROPERTY(dropdown-link-hover-color, QColor(GET_VALUE(gray-dark).toString()).darker(105))
+    SET_PROPERTY(dropdown-link-hover-color, darken(GET_COLOR(gray-dark), 5))
     SET_PROPERTY(dropdown-link-hover-bg, "#f5f5f5") // Hover background for dropdown links.
 
     // Active dropdown menu item text color.
