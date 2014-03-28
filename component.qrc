@@ -7,5 +7,7 @@
         <file>qml/Components/Radio.qml</file>
         <file>qml/Components/CheckBox.qml</file>
         <file>qml/Components/RadioGroup.qml</file>
+        <file>qml/Components/ImageShape.qml</file>
+        <file>qml/Components/ImageShape.frag</file>
     </qresource>
 </RCC>

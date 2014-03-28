@@ -6,7 +6,7 @@ Controls.ApplicationWindow {
     id: mainWindow
     title: qsTr("Hello QML Bootstrap!")
 
-    width: 360*dp ; height: 360*dp
+    width: 720*dp ; height: 480*dp
 
     Rectangle {
         anchors.fill: parent
@@ -81,6 +81,40 @@ Controls.ApplicationWindow {
                 Radio { text: "Radio2"; checked: true; group: radioGroup }
                 Radio { text: "Radio3"; group: radioGroup }
                 Radio { text: "Radio4"; group: radioGroup }
+            }
+
+            Row {
+                spacing: 30*dp
+                Image {
+                    id: sampleImage
+                    width: sourceSize.width; height: sourceSize.height
+                    source: "file:///home/yuntan/Workspace/QtCreator/QMLBootstrap/sample.jpg"
+                }
+                Rectangle {
+                    width: sampleImage.width; height: sampleImage.height
+                    color: "#999"
+                    ImageShape {
+                        id: imageShape1
+                        anchors.fill: parent
+//                        radius: height / 2
+                        source: sampleImage.source
+                        Rectangle {
+                            width: imageShape2.width; height: imageShape2.height
+                            x: imageShape2.contentX; y: imageShape2.contentY
+                            radius: imageShape2.radius; opacity: 0.5
+                        }
+                    }
+                }
+                Rectangle {
+                    width: 100; height: 100
+                    ImageShape {
+                        id: imageShape2
+                        anchors.fill: parent
+                        radius: 50
+                        contentX: 30; contentY: 20
+                        source: sampleImage.source
+                    }
+                }
             }
         }
     }

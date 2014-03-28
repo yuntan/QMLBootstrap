@@ -51,6 +51,12 @@ void registerTypes()
     customize();
     engine->rootContext()->setContextProperty(QLatin1String("faIcons"), m_faIcons);
     engine->rootContext()->setContextProperty(QLatin1String("bs"), m_properties);
+
+    QFile fragFile(":/qml/Components/ImageShape.frag");
+    if(!fragFile.open(QIODevice::ReadOnly)) { return; }
+    QTextStream in(&fragFile);
+    QString frag = in.readAll();
+    engine->rootContext()->setContextProperty(QLatin1String("imageShapeFragShader"), frag);
 }
 
 int main(int argc, char *argv[])
