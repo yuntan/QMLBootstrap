@@ -16,10 +16,10 @@ QQmlApplicationEngine *engine;
 void setupDpUnit()
 {
     //implement density-independent pixel
-    int dp = 1;
+    qreal dp;
     qreal dotsPerInch = app->screens()[0]->physicalDotsPerInch();
     qDebug() << "physicalDotsPerInch = " << dotsPerInch;
-    dp = qRound(dotsPerInch) / 125;
+    dp = qRound(dotsPerInch) / 125.0;
 #ifdef Q_OS_ANDROID
     qDebug() << "Android OS detected";
     QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
@@ -31,6 +31,7 @@ void setupDpUnit()
     qDebug() <<	"iOS detected";
     dp = 3;
 #endif
+    if(dp < 1) { dp = 1; }
     qDebug() << "1dp = " << dp;
     engine->rootContext()->setContextProperty(QLatin1String("dp"), QVariant::fromValue(dp));
 }
