@@ -20,7 +20,7 @@ QtObject {
         _radios.push(r)
         if(r.checked && _checkedIndex === -1) {
             _checkedIndex = _radios.length - 1
-            console.debug(_checkedIndex)
+//            console.debug(_checkedIndex)
         }
         else {
             r.checked = false
