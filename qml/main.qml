@@ -113,6 +113,9 @@ Controls.ApplicationWindow {
                     y: scopeY
                     source: sampleImage.source
                 }
+//                RoundedThumbnail {
+//                    source: sampleImage.source; radius: 30
+//                }
             }
         }
     }

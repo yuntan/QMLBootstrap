@@ -7,9 +7,11 @@
         <file>qml/Components/Radio.qml</file>
         <file>qml/Components/CheckBox.qml</file>
         <file>qml/Components/RadioGroup.qml</file>
+        <file>qml/Components/Thumbnail.qml</file>
         <file>qml/Components/ImageScope.frag</file>
         <file>qml/Components/RoundedImage.frag</file>
         <file>qml/Components/ImageScope.qml</file>
         <file>qml/Components/RoundedImage.qml</file>
+        <file>qml/Components/RoundedThumbnail.qml</file>
     </qresource>
 </RCC>
