@@ -4,7 +4,6 @@ import QtQuick 2.2
  * property string source
  *          Image source
  * property real radius
- * property size sourceSize
  *
  * RoundedImage {
  *   source: "sample.img"
@@ -13,9 +12,21 @@ import QtQuick 2.2
  */
 Item {
     id: roundedImg
-    property alias source: interImage.source
+
     property real radius: 0
+
+    // interImage aliases
+    property alias fillMode: interImage.fillMode
+    property alias horizontalAlignment: interImage.horizontalAlignment
+    property alias mirror: interImage.mirror
+    property alias paintedHeight: interImage.paintedHeight
+    property alias paintedWidth: interImage.paintedWidth
+    property alias progress: interImage.progress
+    property alias smooth: interImage.smooth
+    property alias source: interImage.source
     property alias sourceSize: interImage.sourceSize
+    property alias status: interImage.status
+    property alias verticalAlignment: interImage.verticalAlignment
 
     implicitWidth: interImage.sourceSize.width
     implicitHeight: interImage.sourceSize.height

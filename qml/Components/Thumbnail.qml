@@ -4,7 +4,6 @@ import QtQuick 2.2
  * property string source
  * property bool round
  *          Whether button should have rounded corner.
- * property size sourceSize
  *
  * Thumbnail {
  *   source: "sample.png"
@@ -14,13 +13,24 @@ import QtQuick 2.2
 Item {
     id: thumbnail
 
-    property alias source: thumbImage.source
     property bool round: true
-    property alias sourceSize: thumbImage.sourceSize
 
-    implicitWidth: thumbImage.sourceSize.width
+    // interImage aliases
+    property alias fillMode: interImage.fillMode
+    property alias horizontalAlignment: interImage.horizontalAlignment
+    property alias mirror: interImage.mirror
+    property alias paintedHeight: interImage.paintedHeight
+    property alias paintedWidth: interImage.paintedWidth
+    property alias progress: interImage.progress
+    property alias smooth: interImage.smooth
+    property alias source: interImage.source
+    property alias sourceSize: interImage.sourceSize
+    property alias status: interImage.status
+    property alias verticalAlignment: interImage.verticalAlignment
+
+    implicitWidth: interImage.sourceSize.width
                    + (thumbRect.border.width + bs["thumbnail-padding"]*dp) * 2
-    implicitHeight: thumbImage.sourceSize.height
+    implicitHeight: interImage.sourceSize.height
                     + (thumbRect.border.width + bs["thumbnail-padding"]*dp) * 2
 
     Rectangle {
@@ -31,7 +41,7 @@ Item {
         radius: thumbnail.round ? bs["thumbnail-border-radius"]*dp : 0
 
         Image {
-            id: thumbImage
+            id: interImage
             anchors.fill: parent; anchors.margins: bs["thumbnail-padding"]
         }
     }

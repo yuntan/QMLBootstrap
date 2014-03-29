@@ -9,7 +9,6 @@ import QtQuick 2.2
  *          position of scope
  * property real radius
  *          radius of scope
- * property size sourceSize
  *
  * ImageScope {
  *   width: 50; height: 50
@@ -21,12 +20,23 @@ import QtQuick 2.2
 Item {
     id: imgScope
 
-    property alias source: interImage.source
     property real magnification: 1.0
     property int scopeX: 0
     property int scopeY: 0
     property real radius: 0
+
+    // interImage aliases
+    property alias fillMode: interImage.fillMode
+    property alias horizontalAlignment: interImage.horizontalAlignment
+    property alias mirror: interImage.mirror
+    property alias paintedHeight: interImage.paintedHeight
+    property alias paintedWidth: interImage.paintedWidth
+    property alias progress: interImage.progress
+    property alias smooth: interImage.smooth
+    property alias source: interImage.source
     property alias sourceSize: interImage.sourceSize
+    property alias status: interImage.status
+    property alias verticalAlignment: interImage.verticalAlignment
 
     Image {
         id: interImage

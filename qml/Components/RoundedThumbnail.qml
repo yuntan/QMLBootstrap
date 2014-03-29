@@ -3,7 +3,6 @@ import QtQuick 2.2
 /* RoundedThumbnail - Round shaped image with border
  * property string source
  * property real radius
- * property size sourceSize
  *
  * RoundedThumbnail {
  *   source: "sample.png"
@@ -13,9 +12,20 @@ import QtQuick 2.2
 Item {
     id: rThumb
 
-    property alias source: interImage.source
     property alias radius: thumbRect.radius
+
+    // interImage aliases
+    property alias fillMode: interImage.fillMode
+    property alias horizontalAlignment: interImage.horizontalAlignment
+    property alias mirror: interImage.mirror
+    property alias paintedHeight: interImage.paintedHeight
+    property alias paintedWidth: interImage.paintedWidth
+    property alias progress: interImage.progress
+    property alias smooth: interImage.smooth
+    property alias source: interImage.source
     property alias sourceSize: interImage.sourceSize
+    property alias status: interImage.status
+    property alias verticalAlignment: interImage.verticalAlignment
 
     implicitWidth: interImage.sourceSize.width
                    + (thumbRect.border.width + effect.anchors.margins) * 2
