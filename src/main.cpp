@@ -53,11 +53,18 @@ void registerTypes()
     engine->rootContext()->setContextProperty(QLatin1String("faIcons"), m_faIcons);
     engine->rootContext()->setContextProperty(QLatin1String("bs"), m_properties);
 
-    QFile fragFile(":/qml/Components/ImageShape.frag");
-    if(!fragFile.open(QIODevice::ReadOnly)) { return; }
-    QTextStream in(&fragFile);
-    QString frag = in.readAll();
-    engine->rootContext()->setContextProperty(QLatin1String("imageShapeFragShader"), frag);
+    QFile fragFile1(":/qml/Components/RoundedImage.frag");
+    if(fragFile1.open(QIODevice::ReadOnly)) {
+        QTextStream in(&fragFile1);
+        engine->rootContext()->setContextProperty(QLatin1String("roundedImageFragShader"), in.readAll());
+        fragFile1.close();
+    }
+    QFile fragFile2(":/qml/Components/ImageScope.frag");
+    if(fragFile2.open(QIODevice::ReadOnly)) {
+        QTextStream in(&fragFile2);
+        engine->rootContext()->setContextProperty(QLatin1String("imageScopeFragShader"), in.readAll());
+        fragFile2.close();
+    }
 }
 
 int main(int argc, char *argv[])

@@ -19,7 +19,7 @@ Controls.ApplicationWindow {
 
         Column {
             anchors.centerIn: parent
-            spacing: 3*dp
+            spacing: 10*dp
             Button {
                 size: "large"
                 option: "info"
@@ -32,7 +32,7 @@ Controls.ApplicationWindow {
             }
 
             Row {
-                spacing: 3*dp
+                spacing: 5*dp
                 Button {
                     //            faIcon: "fa-github"
 //                    faIcon: "fa-trash-o"
@@ -75,7 +75,7 @@ Controls.ApplicationWindow {
             }
 
             Row {
-                spacing: 20*dp
+                spacing: 10*dp
                 RadioGroup { id: radioGroup }
                 Radio { text: "Radio1"; group: radioGroup }
                 Radio { text: "Radio2"; checked: true; group: radioGroup }
@@ -85,35 +85,33 @@ Controls.ApplicationWindow {
 
             Row {
                 spacing: 30*dp
-                Image {
+                Thumbnail {
                     id: sampleImage
                     width: sourceSize.width; height: sourceSize.height
-                    source: "file:///home/yuntan/Workspace/QtCreator/QMLBootstrap/sample.jpg"
+                    source: "file:///home/yuntan/Download/sample.jpg"
+//                    round: false
                 }
                 Rectangle {
                     width: sampleImage.width; height: sampleImage.height
                     color: "#999"
-                    ImageShape {
+                    RoundedImage {
                         id: imageShape1
                         anchors.fill: parent
-//                        radius: height / 2
+                        radius: height / 2
                         source: sampleImage.source
                         Rectangle {
                             width: imageShape2.width; height: imageShape2.height
-                            x: imageShape2.contentX; y: imageShape2.contentY
+                            x: imageShape2.scopeX; y: imageShape2.scopeY
                             radius: imageShape2.radius; opacity: 0.5
                         }
                     }
                 }
-                Rectangle {
-                    width: 100; height: 100
-                    ImageShape {
-                        id: imageShape2
-                        anchors.fill: parent
-                        radius: 50
-                        contentX: 30; contentY: 20
-                        source: sampleImage.source
-                    }
+                ImageScope {
+                    id: imageShape2
+                    width: 100; height: 100; radius: height / 2
+                    scopeX: 30; scopeY: 20
+                    y: scopeY
+                    source: sampleImage.source
                 }
             }
         }

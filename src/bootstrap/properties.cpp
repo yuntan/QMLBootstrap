@@ -1078,27 +1078,25 @@ void setupProperties()
     SET_PROPERTY(panel-danger-text, state-danger-text)
     SET_PROPERTY(panel-danger-border, state-danger-border)
     SET_PROPERTY(panel-danger-heading-bg, state-danger-bg)
+    */
 
-
-    //== Thumbnails
-    //
-    //
-
+    // == Thumbnails ==
     // Padding around the thumbnail image
-    SET_PROPERTY(thumbnail-padding, 4px)
+    SET_PROPERTY(thumbnail-padding, 4)
     // Thumbnail background color
-    SET_PROPERTY(thumbnail-bg, body-bg)
+    SET_PROPERTY_BY_ID(thumbnail-bg, body-bg)
     // Thumbnail border color
-    SET_PROPERTY(thumbnail-border, #ddd)
+    SET_PROPERTY(thumbnail-border, "#ddd")
     // Thumbnail border radius
-    SET_PROPERTY(thumbnail-border-radius, border-radius-base)
+    SET_PROPERTY_BY_ID(thumbnail-border-radius, border-radius-base)
 
+    // needless
     // Custom text color for thumbnail captions
-    SET_PROPERTY(thumbnail-caption-color, text-color)
+//    SET_PROPERTY_BY_ID(thumbnail-caption-color, text-color)
     // Padding around the thumbnail caption
-    SET_PROPERTY(thumbnail-caption-padding, 9px)
+//    SET_PROPERTY(thumbnail-caption-padding, 9)
 
-
+    /*
     //== Wells
     //
     //

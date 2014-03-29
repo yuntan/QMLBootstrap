@@ -1,5 +1,5 @@
 varying highp vec2 qt_TexCoord0;
-uniform sampler2D image;
+uniform sampler2D _image;
 uniform lowp float qt_Opacity;
 uniform highp float _w;
 uniform highp float _h;
@@ -32,5 +32,8 @@ void main() {
             && sq(x - 1.0 + _rX) / sq(_rX) + sq(y - 1.0 + _rY) / sq(_rY) > 1.0)
         opacity = 0.0;
 
-    gl_FragColor = texture2D(image, vec2(x * _w + _cX, y * _h + _cY)) * opacity;
+    x = x * _w + _cX; y = y * _h + _cY;
+    if(x < 0.0 || x > 1.0 || y < 0.0 || y > 1.0) opacity = 0.0;
+
+    gl_FragColor = texture2D(_image, vec2(x, y)) * opacity;
 }
