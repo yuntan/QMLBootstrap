@@ -20,5 +20,8 @@ QML Bootstrap
 * Button Group
 * Input Group
 
-# License
-MIT License
+## About this software
+This software is distributed under the MIT License.
+
+__The following are used__  
+[Font Awesome](http://fortawesome.github.io/Font-Awesome/) SIL OFL 1.1  
